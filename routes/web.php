@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,8 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
         Route::resource('isadmin', AdminController::class);
     });
 });
+
+Route::get('/',[FrontendController::class,'index'])->name('beranda');
+Route::get('/sejarah',[FrontendController::class,'sejarah'])->name('sejarah');
+Route::get('/article',[FrontendController::class,'article'])->name('article');
+Route::get('/detailarticle',[FrontendController::class,'detailarticle'])->name('detailarticle');

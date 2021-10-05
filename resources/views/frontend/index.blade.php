@@ -34,24 +34,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('beranda') }}">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sejarah') }}">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="program-page.html">Program</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="discuss-page.html">Diskusi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('article') }}">Artikel</a>
-                    </li>
-                    <li class="nav-item log-in">
-                        <a class="nav-link text-center text-black fw-bold" href="login-page.html">Masuk</a>
-                    </li>
+                    @if(Auth::user())
+                      @include('frontend.nav-loged');
+                    @else
+                      @include('frontend.nav')
+                    @endif
                 </ul>
                 <div class="box-container">
                     <table class="element-container">
@@ -89,7 +76,13 @@
                         <p>Edumind adalah sebuah situs yang berisi kumpulan event online seperti webinar, workshop,
                             ataupun kursus
                             dan juga terdapat ruang untuk diskusi.</p>
-                        <button type="button" class="btn text-white fw-bold">Daftar Akun</button>
+                        @if(Auth::user())
+                        @else
+                          <form action="{{ route('register') }}" method="get">
+                            @csrf
+                            <button type="submit" class="btn text-white fw-bold">Daftar Akun</button>
+                          </form>
+                        @endif
                     </div>
                 </div>
                 <div class="header-img col-12 col-lg-6 d-none d-lg-flex align-items-end">
